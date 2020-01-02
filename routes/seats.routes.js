@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('./../db');
 
-// get all seats
-router.route('/seats').get((req, res) => {
+// GET /seats
+router.route('/api/seats').get((req, res) => {
   res.json(db.seats);
 });
 
-/* ... */
+// GET /seats/:id
+// POST /seats
+// DELETE /seats/:id
+// PUT /seats/id
 
 module.exports = router;
