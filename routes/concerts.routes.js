@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('./../db');
 
 // GET /concerts
-router.route('/api/concerts').get((req, res) => {
+router.route('/concerts').get((req, res) => {
   res.json(db.concerts);
   console.log(concerts); 
 });

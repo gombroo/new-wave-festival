@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('./../db');
 
 // GET /seats
-router.route('/api/seats').get((req, res) => {
+router.route('/seats').get((req, res) => {
   res.json(db.seats);
 });
 
