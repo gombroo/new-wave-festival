@@ -15,12 +15,8 @@ router.route('/testimonials/:id').get((req, res) => {
   res.json(newDb);
 });
 
-// GET /testimonials/random – return random post
-// app.get('/testimonials/random', (req, res) => {
-// });
-
 // POST /testimonials
-router.route('/testimonials/').get((req, res) => {
+router.route('/testimonials/').post((req, res) => {
   const { author, text } = req.body;
   db.testimonials.push({id: (db.testimonials[db.testimonials.length -1].id +1) ,author, text});
   // res.json(db.testimonials); // show db with added item
@@ -28,7 +24,7 @@ router.route('/testimonials/').get((req, res) => {
 });
 
 // PUT /testimonials/:id – edit post with particular id using req.body received from frontend
-router.route('/testimonials/:id'). get((req, res) => {
+router.route('/testimonials/:id').put((req, res) => {
   const { author, text } = req.body;  
   const { id } = req.params;
 
@@ -45,7 +41,7 @@ router.route('/testimonials/:id'). get((req, res) => {
 });
 
 // DELETE /testimonials/:id – delete single post with particular id
-router.route('/testimonials/:id').get((req, res) => {
+router.route('/testimonials/:id').delete((req, res) => {
   const { id } = req.params;
   db.testimonials = db.testimonials.filter((item) => {
     return item.id != id;
