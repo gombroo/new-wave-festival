@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 // import routes
@@ -23,6 +24,18 @@ app.use((req, res, next) => {
   res.send({ message: 'Not found' });
 });
 
-app.listen(8000, () => {
+// return react app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+// return static files from the react app
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+// app.listen(8000, () => {
+//   console.log('Server is running on port: 8000');
+// });
+
+app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
