@@ -44,6 +44,10 @@ class OrderTicketForm extends React.Component {
     e.preventDefault();
 
     if(order.client && order.email && order.day && order.seat) {
+      // updateAllSeats
+      // wait 2 min 
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
       addSeat(order);
       this.setState({ 
         order: {
