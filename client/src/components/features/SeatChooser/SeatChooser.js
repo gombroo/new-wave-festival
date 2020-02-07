@@ -8,11 +8,15 @@ class SeatChooser extends React.Component {
   componentDidMount() {
     const { loadSeats } = this.props;
     loadSeats();
+  
+    // update seats every 2 minutes
+    setInterval(() => {
+      loadSeats();
+      }, 1000 * 60 * 2); // 1000ms = 1sec, 1 min = 60sec / 1000ms * 60sec * 2 = 2 min
   }
 
   isTaken = (seatId) => {
     const { seats, chosenDay } = this.props;
-
     return (seats.some(item => (item.seat === seatId && item.day === chosenDay)));
   }
 
@@ -26,7 +30,6 @@ class SeatChooser extends React.Component {
   }
 
   render() {
-
     const { prepareSeat } = this;
     const { requests } = this.props;
 

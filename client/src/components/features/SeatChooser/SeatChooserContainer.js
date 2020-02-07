@@ -1,3 +1,4 @@
+  
 import { connect } from 'react-redux';
 import { getSeats, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
 import SeatChooser from './SeatChooser';

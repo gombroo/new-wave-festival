@@ -38,6 +38,9 @@ export const loadSeatsRequest = () => {
       dispatch(loadSeats(res.data));
       dispatch(endRequest({ name: 'LOAD_SEATS' }));
 
+      // load all free seats after choosing the seat 
+      dispatch(loadSeatsRequest());
+
     } catch(e) {
       dispatch(errorRequest({ name: 'LOAD_SEATS', error: e.message }));
     }

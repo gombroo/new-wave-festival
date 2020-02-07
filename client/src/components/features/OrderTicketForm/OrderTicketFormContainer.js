@@ -1,3 +1,4 @@
+  
 import { connect } from 'react-redux';
 import { addSeatRequest, getRequests, loadSeats } from '../../../redux/seatsRedux';
 import OrderTicketForm from './OrderTicketForm';

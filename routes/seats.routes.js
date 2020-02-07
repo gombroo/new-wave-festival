@@ -1,46 +1,55 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('./../db');
+const db = require("./../db");
 
 // GET /seats
-router.route('/seats').get((req, res) => {
+router.route("/seats").get((req, res) => {
   res.json(db.seats);
 });
 
 // POST /seats
-router.route('/seats/').post((req, res) => {
-  const { author, text } = req.body;
-  db.seats.push({id: (db.seats[db.seats.length -1].id +1) ,author, text});
-  // res.json(db.seats); // show db with added item
-  res.send({ message: 'OK' }); // show message only
+router.route("/seats/").post((req, res) => {
+  const { client, email, day, seat } = req.body;
+  
+  // if the seat is already booked
+  const isBusy = db.seats.find((someSeat) => someSeat.day === day && someSeat.seat === seat);
+  
+  if (isBusy) {
+    res.status(400).json({ message: 'Seat is busy' });
+  } else {  
+    db.seats.push({ id: db.seats[db.seats.length - 1].id + 1, client, email, day, seat });
+    res.json(db.seats); // show db with added item
+    // res.send({ message: 'OK' }); // show message only
+  }
 });
 
 // PUT /seats/:id
-router.route('/seats/:id').put((req, res) => {
-  const { author, text } = req.body;  
+router.route("/seats/:id").put((req, res) => {
+  const { client, email, day, seat } = req.body;
   const { id } = req.params;
 
-  db.seats.map((item) => {
-    if(item.id == id){
-      item.author = author;
-      item.text = text;
+  db.seats.map(item => {
+    if (item.id == id) {
+      item.client = client;
+      item.email = email;
+      item.day = day;
+      item.seat = seat;
       return item;
     }
     return item;
   });
-  res.send({ message: 'OK' }); // show message only 
+  res.send({ message: "OK" }); // show message only
   // res.json(db.seats); // show modified db
 });
 
-
 // DELETE /seats/:id
-router.route('/seats/:id').delete((req, res) => {
+router.route("/seats/:id").delete((req, res) => {
   const { id } = req.params;
-  db.seats = db.seats.filter((item) => {
+  db.seats = db.seats.filter(item => {
     return item.id != id;
-  })
+  });
   // res.json(db.seats); // show new db with deleted item
-  res.send({ message: 'OK' }); // show message only
+  res.send({ message: "OK" }); // show message only
 });
 
 module.exports = router;
