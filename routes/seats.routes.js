@@ -15,7 +15,7 @@ router.route("/seats/").post((req, res) => {
   const isBusy = db.seats.find((someSeat) => someSeat.day === day && someSeat.seat === seat);
   
   if (isBusy) {
-    res.status(400).json({ message: 'Seat is busy' });
+    res.status(400).json({ message: 'Seat is busy.' });
   } else {  
     db.seats.push({ id: db.seats[db.seats.length - 1].id + 1, client, email, day, seat });
     res.json(db.seats); // show db with added item

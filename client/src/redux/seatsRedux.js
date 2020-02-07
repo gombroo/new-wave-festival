@@ -38,13 +38,9 @@ export const loadSeatsRequest = () => {
       dispatch(loadSeats(res.data));
       dispatch(endRequest({ name: 'LOAD_SEATS' }));
 
-      // load all free seats after choosing the seat 
-      dispatch(loadSeatsRequest());
-
     } catch(e) {
       dispatch(errorRequest({ name: 'LOAD_SEATS', error: e.message }));
     }
-
   };
 };
 
@@ -58,6 +54,9 @@ export const addSeatRequest = (seat) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(addSeat(res));
       dispatch(endRequest({ name: 'ADD_SEAT' }));
+
+      // load all free seats after choosing the seat 
+      dispatch(loadSeatsRequest());
 
     } catch(e) {
       dispatch(errorRequest({ name: 'ADD_SEAT', error: e.message }));

@@ -46,9 +46,11 @@ class OrderTicketForm extends React.Component {
     if(order.client && order.email && order.day && order.seat) {
       // updateAllSeats
       // wait 2 min 
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-      await addSeat(order);
-      // addSeat(order);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      // await addSeat(order);
+      addSeat(order);
+      console.log('Show last order: ', order);
+
       this.setState({ 
         order: {
           client: '',
@@ -96,7 +98,7 @@ class OrderTicketForm extends React.Component {
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input required type="checkbox" /> I agree with <a href="#">Terms and conditions</a> and <a href="#">Privacy Policy</a>.
+                <Input required type="checkbox" /> I agree with <a href="http://example.com/terms">Terms and conditions</a> and <a href="http://example.com/terms">Privacy Policy</a>.
               </Label>
             </FormGroup>
             <Button color="primary" className="mt-3">Submit</Button>
