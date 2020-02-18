@@ -30,13 +30,13 @@ app.use('/api', testimonialsRoutes); // add testimonials routes to server
 app.use('/api', concertsRoutes); // add concert routes 
 app.use('/api', seatsRoutes); // add seats routes 
 
-app.use((req, res, next) => {
-  res.send({ message: 'Not found' });
-});
-
 // return react app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+app.use((req, res, next) => {
+  res.send({ message: 'Not found' });
 });
 
 const server = app.listen(process.env.PORT || 8000, () => {
