@@ -10,6 +10,7 @@ router.route("/seats").get((req, res) => {
 // POST /seats
 router.route("/seats/").post((req, res) => {
   const { client, email, day, seat } = req.body;
+  const io = req.io; 
   
   // if the seat is already booked
   const isBusy = db.seats.find((someSeat) => someSeat.day === day && someSeat.seat === seat);
@@ -21,7 +22,8 @@ router.route("/seats/").post((req, res) => {
     res.json(db.seats); // show db with added item
     // res.send({ message: 'OK' }); // show message only
 
-    // seatsUpdated - emit to all users
+    // seatsUpdated - emit to all users 
+    io.emit('seatsUpdated', db.seats);
   }
 });
 

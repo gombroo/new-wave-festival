@@ -12,11 +12,11 @@ class SeatChooser extends React.Component {
     this.socket = io.connect(
       process.env.NODE_ENV === "production" ? process.env.PORT : "http://localhost:8000"
     );
-  
-    // update seats every 2 minutes
-    setInterval(() => {
+
+    // update seats with websocket, add event listener 
+    this.socket.on('seatsUpdated', () => {
       loadSeats();
-      }, 1000 * 60 * 2); // 1000ms = 1sec, 1 min = 60sec / 1000ms * 60sec * 2 = 2 min
+    })
   }
 
   isTaken = (seatId) => {

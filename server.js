@@ -48,8 +48,4 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('New socket: ', socket.id, ' has joined!');
-  
-  socket.on('disconnect', () => {
-    console.log('New socket: ', socket.id, ' has left');
-  });
 });
