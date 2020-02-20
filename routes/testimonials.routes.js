@@ -6,7 +6,7 @@ const db = require('./../db');
 router.route('/testimonials').get((req, res) => {
   res.json(db.testimonials);
 });
-
+localStorage
 // GET /testimonials/:id
 router.route('/testimonials/:id').get((req, res) => {
   let newDb = db.testimonials.filter((item) => {  // item = single db object
