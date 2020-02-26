@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 // connect with mongo DB
-//mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect('mongodb+srv://gombroo:kodilla2020@cluster0-fjp6d.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 

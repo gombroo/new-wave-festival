@@ -60,6 +60,7 @@ exports.putOne = async (req, res) => {
       item.price = price;
       item.day = day;
       item.image = image;
+      await item.save();
       res.json(await Concert.find());
     } 
     else res.status(404).json({ message: 'Not found'});
